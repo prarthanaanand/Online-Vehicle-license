@@ -1,8 +1,8 @@
 package com.vl.info;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.io.ObjectInputFilter.Status;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Assertions;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -59,55 +59,41 @@ public class RTOOfficerServicesTest {
 	@InjectMocks
 	private RTOOfficerServices rtoofficerservice;
 	
-	
-
-	
 	@Test
-	public void updateApplicationById()//Long applicationNumber);
-	{
-
-		final Application app3 = new Application(1L, LocalDate.now(), ApplicationType.DL, ModeOfPayment.UPI, 1500, PaymentStatus.Approved, ApplicationStatus.APPROVED, "No");		
-		 final Application app4 = new Application(1L, LocalDate.now(), ApplicationType.LL, ModeOfPayment.UPI, 1500, PaymentStatus.Approved, ApplicationStatus.APPROVED, "No");
-
-		when(apprepo.findById(1L)).thenReturn(Optional.of(app3));
-		when(apprepo.save(app3)).thenReturn(app4);
-		assertEquals(app4,rtoofficerservice.updateApplicationById(1L));
+	public void getApplicationByIdTest() {
+		
+		Application app = new Application(1L);
+		when(apprepo.getById(1L)).thenReturn(app);
+		Assertions.assertEquals(app, rtoofficerservice.getApplicationByID(1L));
 	}
 	
 	
 	@Test
-	public void getAllPendingApplications()
+	public void getAllPendingApplicationsTest()
 	{
 		Application app3 = new Application(1L, LocalDate.now(), ApplicationType.DL, ModeOfPayment.UPI, 1500, PaymentStatus.Approved, ApplicationStatus.PENDING, "No");		
 		//when(rtorepo.getAllPendingApplications(app3.getStatus.)).
-	assertEquals(app3, rtoofficerservice.getAllPendingApplications());
+	Assertions.assertEquals(app3, rtoofficerservice.getAllPendingApplications(ApplicationStatus.PENDING));
 	}
 	
 	@Test
-	public void getAllRejectedApplications()
+	public void checkForAppointmentstest() {
+		
+		List<Appointment> appo = new ArrayList<Appointment>();
+		appo.add(new Appointment(1L));
+		appo.add(new Appointment(2L));
+     when(rtorepo.findAll()).thenReturn(appo);
+     Assertions.assertEquals(2, rtoofficerservice.checkForAppointments().size());
+}
+	@Test
+    public void updateResultTest()
 	{
-		Application app3 = new Application(1L, LocalDate.now(), ApplicationType.DL, ModeOfPayment.UPI, 1500, PaymentStatus.Approved, ApplicationStatus.REJECTED, "No");		
-		//when(rtorepo.getAllPendingApplications(app3.getStatus.)).
-	assertEquals(app3, rtoofficerservice.getAllRejectedApplications());
-	}
+		final Appointment apt1 = new Appointment(12L, testResult.Pass);
+		final Appointment apt2 = new Appointment(12L, testResult.Pass);
 
-	@Test
-	public void getAllApprovedApplications()
-	{
-		Application app3 = new Application(1L, LocalDate.now(), ApplicationType.DL, ModeOfPayment.UPI, 1500, PaymentStatus.Approved, ApplicationStatus.REJECTED, "No");		
-		//when(rtorepo.getAllPendingApplications(app3.getStatus.)).
-	assertEquals(app3, rtoofficerservice.getAllApprovedApplications());
+		when(rtorepo.findById(12L)).thenReturn(Optional.of(apt1));
+		when(rtorepo.save(apt1)).thenReturn(apt2);
+		Assertions.assertEquals(apt2,rtoofficerservice.updateResult(apt1));
 	}
-	
-//	@Test
-//    public void updateResultTest()
-//	{
-//		final Appointment apt1 = new Appointment(12L, testResult.Pass);
-//		final Appointment apt2 = new Appointment(12L, testResult.Pass);
-//
-//		when(apprepo.findById(12L)).thenReturn(Optional.of(apt1));
-//		when(apprepo.save(apt1)).thenReturn(apt2);
-//		assertEquals(apt2,rtoofficerservice.updateResult(apt1));
-//	}
 
 }

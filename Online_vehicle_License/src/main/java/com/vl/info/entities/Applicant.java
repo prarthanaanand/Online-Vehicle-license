@@ -7,6 +7,8 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 	@Entity
@@ -19,7 +21,10 @@ import javax.persistence.Table;
 	    private LocalDate placeOfBirth;
 	    private String qualification;
 	    
-	    @Enumerated(EnumType.STRING)
+	    @OneToOne(mappedBy = "application")
+	    private Application application;
+
+		@Enumerated(EnumType.STRING)
 	    private Nationality  nationality;
 	    
 	    @Embedded
@@ -64,6 +69,14 @@ import javax.persistence.Table;
 		public void setQualification(String qualification) {
 			this.qualification = qualification;
 		}
+		
+		 public Application getApplication() {
+				return application;
+			}
+
+			public void setApplication(Application application) {
+				this.application = application;
+			}
 
 		public Nationality getNationality() {
 			return nationality;
@@ -113,22 +126,25 @@ import javax.persistence.Table;
 
 		
 
+		
+
+		
 		public Applicant(Long id, com.vl.info.entities.Role role, String username, String email, Long mobilenumber,
 				String password, Gender gender, LocalDate dateOfBirth, LocalDate placeOfBirth, String qualification,
-				Nationality nationality, List<com.vl.info.entities.Address> address, VehicleType vehicleType,
-				String vehicleNumber) {
-			super(id, role, username, email, mobilenumber, password);
+				Application application, Nationality nationality, List<com.vl.info.entities.Address> address,
+				VehicleType vehicleType, String vehicleNumber) {
+			super();
 			this.gender = gender;
 			this.dateOfBirth = dateOfBirth;
 			this.placeOfBirth = placeOfBirth;
 			this.qualification = qualification;
+			this.application = application;
 			this.nationality = nationality;
 			Address = address;
 			this.vehicleType = vehicleType;
 			this.vehicleNumber = vehicleNumber;
 		}
 
-		
 		public Applicant( LocalDate dateOfBirth, String qualification, Nationality nationality,
 				VehicleType vehicleType, String vehicleNumber) {
 			super();
@@ -137,6 +153,12 @@ import javax.persistence.Table;
 			this.nationality = nationality;
 			this.vehicleType = vehicleType;
 			this.vehicleNumber = vehicleNumber;
+		}
+
+		
+		public Applicant( Application application) {
+			super();
+			this.application = application;
 		}
 
 		@Override

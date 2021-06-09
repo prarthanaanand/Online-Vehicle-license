@@ -10,16 +10,29 @@ public class RTOOfficer extends User
 {
 	@OneToOne
 	private Applicant applicant;
+	
+	@OneToOne
+	private Appointment appointment;
+	
 	@OneToOne
 	private RTOOffice office;
 
-	public RTOOfficer() {
-		super();
+	
+
+	public Applicant getApplicant() {
+		return applicant;
 	}
 
-	public RTOOfficer(RTOOffice office) {
-		super();
-		this.office = office;
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
+	}
+
+	public Appointment getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
 	}
 
 	public RTOOffice getOffice() {
@@ -28,6 +41,26 @@ public class RTOOfficer extends User
 
 	public void setOffice(RTOOffice office) {
 		this.office = office;
+	}
+
+	
+	public RTOOfficer() {
+		super();
+	}
+
+	public RTOOfficer(RTOOffice office) {
+		super();
+		this.office = office;
+	}
+	
+	public RTOOfficer( Appointment appointment) {
+		super();
+		this.appointment = appointment;
+	}
+
+	public RTOOfficer(Applicant applicant) {
+		super();
+		this.applicant = applicant;
 	}
 
 	@Override

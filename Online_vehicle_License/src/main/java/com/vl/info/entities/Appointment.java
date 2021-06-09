@@ -20,7 +20,7 @@ public class Appointment
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	
-	private long appointmentNumber;
+	private Long appointmentNumber;
 	private LocalDate testDate;
 	private LocalDateTime timeSlot;
 	
@@ -30,62 +30,14 @@ public class Appointment
 	@OneToOne
 	private Application application;
 	
-	@ManyToOne
-	private RTOOfficer RTOOfficer;
-	
-	
+	@OneToOne(mappedBy = "rTOOfficer")
+	private RTOOfficer rTOOfficer;
 
-	
-	public Appointment(Long appointmentNumber, LocalDate testDate, LocalDateTime timeSlot,
-			com.vl.info.entities.testResult testResult) {
-		super();
-		this.appointmentNumber = appointmentNumber;
-		this.testDate = testDate;
-		this.timeSlot = timeSlot;
-		this.testResult = testResult;
-	}
-
-
-
-	public Appointment(long appointmentNumber, com.vl.info.entities.testResult testResult) {
-		super();
-		this.appointmentNumber = appointmentNumber;
-		this.testResult = testResult;
-	}
-
-
-
-	
-
-
-
-	public Appointment(LocalDate testDate, LocalDateTime timeSlot, com.vl.info.entities.testResult testResult,
-			com.vl.info.entities.RTOOfficer rTOOfficer) {
-		super();
-		this.testDate = testDate;
-		this.timeSlot = timeSlot;
-		this.testResult = testResult;
-		RTOOfficer = rTOOfficer;
-	}
-
-		
-
-	public Appointment(long appointmentNumber, LocalDate testDate, LocalDateTime timeSlot,
-			com.vl.info.entities.testResult testResult, com.vl.info.entities.RTOOfficer rTOOfficer) {
-		super();
-		this.appointmentNumber = appointmentNumber;
-		this.testDate = testDate;
-		this.timeSlot = timeSlot;
-		this.testResult = testResult;
-		RTOOfficer = rTOOfficer;
-	}
-
-
-	public long getAppointmentNumber() {
+	public Long getAppointmentNumber() {
 		return appointmentNumber;
 	}
 
-	public void setAppointmentNumber(long appointmentNumber) {
+	public void setAppointmentNumber(Long appointmentNumber) {
 		this.appointmentNumber = appointmentNumber;
 	}
 
@@ -109,27 +61,76 @@ public class Appointment
 		return testResult;
 	}
 
-
 	public void setTestResult(testResult testResult) {
 		this.testResult = testResult;
 	}
 
-
-	public RTOOfficer getRTOOfficer() {
-		return RTOOfficer;
+	public Application getApplication() {
+		return application;
 	}
 
-
-	public void setRTOOfficer(RTOOfficer rTOOfficer) {
-		RTOOfficer = rTOOfficer;
+	public void setApplication(Application application) {
+		this.application = application;
 	}
 
+	public RTOOfficer getrTOOfficer() {
+		return rTOOfficer;
+	}
+
+	public void setrTOOfficer(RTOOfficer rTOOfficer) {
+		this.rTOOfficer = rTOOfficer;
+	}
+
+	public Appointment(Long appointmentNumber, LocalDate testDate, LocalDateTime timeSlot,
+			com.vl.info.entities.testResult testResult, Application application, RTOOfficer rTOOfficer) {
+		super();
+		this.appointmentNumber = appointmentNumber;
+		this.testDate = testDate;
+		this.timeSlot = timeSlot;
+		this.testResult = testResult;
+		this.application = application;
+		this.rTOOfficer = rTOOfficer;
+	}
+
+	public Appointment(LocalDate testDate, LocalDateTime timeSlot, com.vl.info.entities.testResult testResult,
+			Application application) {
+		super();
+		this.testDate = testDate;
+		this.timeSlot = timeSlot;
+		this.testResult = testResult;
+		this.application = application;
+	}
+
+	public Appointment(RTOOfficer rTOOfficer) {
+		super();
+		this.rTOOfficer = rTOOfficer;
+	}
+
+	public Appointment(Application application) {
+		super();
+		this.application = application;
+	}
+
+	public Appointment(Long appointmentNumber) {
+		super();
+		this.appointmentNumber = appointmentNumber;
+	}
+
+	public Appointment(Long appointmentNumber, com.vl.info.entities.testResult testResult) {
+		super();
+		this.appointmentNumber = appointmentNumber;
+		this.testResult = testResult;
+	}
 
 	@Override
 	public String toString() {
 		return "Appointment [appointmentNumber=" + appointmentNumber + ", testDate=" + testDate + ", timeSlot="
-				+ timeSlot + ", testResult=" + testResult + ", RTOOfficer=" + RTOOfficer + "]";
+				+ timeSlot + ", testResult=" + testResult + ", application=" + application + ", rTOOfficer="
+				+ rTOOfficer + "]";
 	}
+	
+	
 
+	
 	
 }

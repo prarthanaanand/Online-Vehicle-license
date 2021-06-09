@@ -26,9 +26,9 @@ public class UserServicesTest {
 	public void RegisterTest()
 	{
 		//Arranging the data
-		final User user1 = new User(1L,Role.User,"Raymond","raymond12@gmail.com",213216L,"1234");
+		final User user1 = new User(1L, "Sudharshan", "1234");
 	
-		final User user2 = new User(2L,Role.Officer,"Raymond","raymond12@gmail.com",213216L,"1234");
+		final User user2 = new User(1L, "Sudharshan", "1234");
 
 	
 		when(userRepository.save(user2)).thenReturn(user1);
@@ -44,7 +44,7 @@ public class UserServicesTest {
 }
 	
 	@Test
-	public void  logInTest()
+	public void  LogInTest()
 	{
 		User user=new User("abc","1234");
 	

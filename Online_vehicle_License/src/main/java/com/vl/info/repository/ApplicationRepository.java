@@ -9,7 +9,7 @@ import com.vl.info.entities.ApplicationStatus;
 import java.util.*;
 
 @Repository
-public interface ApplicationRepository extends JpaRepository<Application ,Long> {
+public interface ApplicationRepository extends JpaRepository<Application,Long>{
 
 	List<Application> findByStatus(ApplicationStatus status);
 	
