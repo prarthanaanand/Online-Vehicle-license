@@ -15,13 +15,13 @@ import com.vl.info.entities.LearnerLicense;
 import com.vl.info.entities.RTOOfficer;
 import com.vl.info.repository.ApplicationRepository;
 import com.vl.info.repository.RtoOfficerRepository;
-import com.vl.info.services.UserServices;
+
 
 @Transactional 
 
 @Service
 
-public class RTOOfficerServices implements IRTOOfficerServices {
+public class RTOOfficerServices implements IRTOOfficerServices{
 
 
 	@Autowired
@@ -43,6 +43,7 @@ public class RTOOfficerServices implements IRTOOfficerServices {
 		return apprepo.findByStatus(status);
 	}
 
+	
 
 	@Override
 	public Appointment updateResult(Appointment appointment) {
@@ -54,9 +55,10 @@ public class RTOOfficerServices implements IRTOOfficerServices {
 	@Override
 	public List<Appointment> checkForAppointments() {
 		// TODO Auto-generated method stub
-		return rtorepo.findAll();
+		return null;
 	}
 
+	
 	
 	
 }

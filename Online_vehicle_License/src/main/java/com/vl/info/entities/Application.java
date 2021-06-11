@@ -20,10 +20,9 @@ public class Application
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long applicationNumber;
-	@OneToOne(mappedBy = "applicant")
+	private long applicationNumber;
+	@ManyToOne
 	private Applicant applicant;
-	
 	private LocalDate applicationDate;
 	@ManyToOne
 	private RTOOffice rtoOffice;
@@ -56,20 +55,6 @@ public class Application
 
 
 	
-	public Application(Applicant applicant) {
-		super();
-		this.applicant = applicant;
-	}
-
-
-
-	public Application(Long applicationNumber) {
-		super();
-		this.applicationNumber = applicationNumber;
-	}
-
-
-
 	public Application(Applicant applicant, LocalDate applicationDate, RTOOffice rtoOffice, ApplicationType type,
 			List<Documents> documents, ModeOfPayment modeOfPayment, double amountPaid, PaymentStatus paymentStatus,
 			Appointment appointment, ApplicationStatus status, String remarks) {
@@ -89,7 +74,7 @@ public class Application
 
 
 
-	public Application(Long applicationNumber, Applicant applicant, LocalDate applicationDate, RTOOffice rtoOffice,
+	public Application(long applicationNumber, Applicant applicant, LocalDate applicationDate, RTOOffice rtoOffice,
 			ApplicationType type, List<Documents> documents, ModeOfPayment modeOfPayment, double amountPaid,
 			PaymentStatus paymentStatus, Appointment appointment, ApplicationStatus status, String remarks) {
 		super();
@@ -109,7 +94,7 @@ public class Application
 
 
 
-	public Application(Long applicationNumber, LocalDate applicationDate, ApplicationType type,
+	public Application(long applicationNumber, LocalDate applicationDate, ApplicationType type,
 			ModeOfPayment modeOfPayment, double amountPaid, PaymentStatus paymentStatus, ApplicationStatus status,
 			String remarks) {
 		super();
@@ -125,12 +110,12 @@ public class Application
 
 
 
-	public long getApplicationNumber(Long applicationNumber) {
+	public long getApplicationNumber(long applicationNumber) {
 		return applicationNumber;
 	}
 
 
-	public void setApplicationNumber(Long applicationNumber) {
+	public void setApplicationNumber(long applicationNumber) {
 		this.applicationNumber = applicationNumber;
 	}
 
@@ -148,12 +133,6 @@ public class Application
 	public LocalDate getApplicationDate() {
 		return applicationDate;
 	}
-
-
-	public long getApplicationNumber() {
-		return applicationNumber;
-	}
-
 
 
 	public void setApplicationDate(LocalDate applicationDate) {

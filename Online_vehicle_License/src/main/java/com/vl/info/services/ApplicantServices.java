@@ -14,13 +14,11 @@ import com.vl.info.repository.ApplicantRepository;
 public class ApplicantServices implements IApplicantServices {
 @Autowired
 private ApplicantRepository applicantRepository;
-	
-@Override
+	@Override
 	public Applicant addApplicant(Applicant applicant) {
 		
 		return applicantRepository.save(applicant);
 	}
-	
 	@Override
 	public Appointment findAppointmentByApplicantIdAndApplicationId(Long applicantNumber, Long applicationNumber,ApplicationType type) {
 			
